@@ -25,7 +25,7 @@ if not os.environ.get("OMP_THREAD_LIMIT"):
     commands = []
     if system() == "Linux":
         commands = [
-            "sudo yum install poppler-utils",
+            # "sudo yum install poppler-utils",
             "sudo yum install autoconf automake libpng-devel libtiff-devel libtool pkgconfig.x86_64 libpng12-devel.x86_64 libjpeg-devel libtiff-devel.x86_64 zlib-devel.x86_64",
             "cd /tmp",
             "wget http://www.leptonica.org/source/leptonica-1.79.0.tar.gz",
