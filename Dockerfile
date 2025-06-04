@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 
-# Install system packages required to build tesserocr
+# Install system packages required to build tesserocr and related tools
 RUN apt-get update && apt-get install -y \
     autoconf automake libtool \
     libpng-dev libjpeg-dev libtiff-dev zlib1g-dev \
@@ -12,8 +12,10 @@ RUN apt-get update && apt-get install -y \
 # Set work directory
 WORKDIR /app
 
-# Copy and install Python dependencies
-COPY requirements.txt .
+# Copy all project files including app.py
+COPY . /app
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the app port
