@@ -16,12 +16,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY . .
-
-# Run _sys.py during build
-RUN python _sys.py
-
 # Expose the app port
 EXPOSE 8000
 
