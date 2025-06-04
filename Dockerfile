@@ -1,23 +1,27 @@
-FROM python:3.11-slim
+FROM python:3.9-slim
 
-# Install system dependencies
+# Install basic tools
 RUN apt-get update && apt-get install -y \
-    tesseract-ocr \
-    poppler-utils \
-    leptonica-progs \
-    && rm -rf /var/lib/apt/lists/*
+    autoconf automake libtool \
+    libpng-dev libjpeg-dev libtiff-dev zlib1g-dev \
+    pkg-config wget curl git poppler-utils \
+    build-essential \
+    && apt-get clean
 
-# Set working directory
+# Set work directory
 WORKDIR /app
 
-# Copy project files
-COPY . /app
-
-# Install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port
+# Copy code
+COPY . .
+
+# Run _sys.py during build
+RUN python _sys.py
+
+# Expose the port
 EXPOSE 8000
 
-# Define default command
+# Start the app
 CMD ["python", "app.py"]
